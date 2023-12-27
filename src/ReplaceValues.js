@@ -68,8 +68,12 @@ export default class ReplaceValues{
 
             let directory = pathAndFileName.split('/')[1]
             fs.existsSync(directory) || fs.mkdirSync(directory);
-            fs.unlink(pathAndFileName,(err) => { 
-                if(err) console.log(`Error delete file ${pathAndFileName}`)
+            fs.existsSync(pathAndFileName,(exist)=>{ 
+                if(exist){
+                    fs.unlink(pathAndFileName,(err) => {
+                        if(err) console.log(`Error delete file ${pathAndFileName}`)
+                    })
+                }
             })
 
             fs.writeFile(pathAndFileName,this.getAttribValue(this,fileContent),(err) => {
@@ -85,4 +89,3 @@ export default class ReplaceValues{
     }
 
 }
-

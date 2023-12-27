@@ -25,5 +25,5 @@ module.exports = {
     "rules": {
         
     },
-    "ignorePatterns": ["ttest.js", "**/templates/*.js", "**/temp/*.js"],
+    "ignorePatterns": ["ttest.js", "**/templates/*.js", "**/temp/*.js", "**/dist/*.js"],
 }
