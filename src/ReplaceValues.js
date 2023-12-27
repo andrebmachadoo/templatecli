@@ -1,7 +1,7 @@
 import  fs  from "fs";
-import templateRoutes from "./templates/template.routes.js";
-import templateController from "./templates/template.controller.js";
-import templateModel from "./templates/template.model.js";
+import templateRoutes from "../templates/template.routes.js";
+import templateController from "../templates/template.controller.js";
+import templateModel from "../templates/template.model.js";
 
 
 export default class ReplaceValues{
@@ -55,15 +55,6 @@ export default class ReplaceValues{
         this.ReplaceModel()
     }
 
-    // CreateFile(pathAndFileName,fileContent){
-    //     fs.writeFile(pathAndFileName,fileContent,(err) => {
-    //         if(err){
-    //             return console.log(`Erro ao criar o arquivo ${pathAndFileName}.`)
-    //         }
-    //         //Caso não tenha erro, retornaremos a mensagem de sucesso
-    //         console.log(`Arquivo ${pathAndFileName} Criado`);
-    //     });
-    // }
 
     CreateTemplateFiles(){
         this.ReplaceAll()
@@ -91,18 +82,6 @@ export default class ReplaceValues{
             });
 
         }
-        // templatelist.forEach(v=>{
-        //     let template = Object.keys(v)[0]
-        //     fs.writeFile(pathAndFileName,fileContent,(err) => {
-        //         if(err){
-        //             return console.log(`Erro ao criar o arquivo ${pathAndFileName}.`)
-        //         }
-        //         //Caso não tenha erro, retornaremos a mensagem de sucesso
-        //         console.log(`Arquivo ${pathAndFileName} Criado`);
-        //     });
-        //})
-
-        
     }
 
 }

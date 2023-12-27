@@ -1,4 +1,4 @@
-import ReplaceValues from "./src/replacevalues.js";
+import ReplaceValues from "./src/ReplaceValues.js";
 import { help } from "./templates/help.js";
 // Tratando parametros 
 var params = process.argv
