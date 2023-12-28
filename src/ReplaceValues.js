@@ -9,7 +9,7 @@ export default class ReplaceValues{
         this.templateModel = templateModel
         this.fields = ''
         this.templateName = ''
-        this.path = '.'
+        this.path = 'src'
         
         Object.assign(this, attribs)
         
@@ -57,7 +57,7 @@ export default class ReplaceValues{
 
     CreateTemplateFiles(){
         this.ReplaceAll()
-        const path_root = this.path || '.'
+        const path_root = this.path || 'src'
         let templatelist = {
             templateRoutes:`${path_root}/routes/${this.templateName}.routes.js`,
             templateController:`${path_root}/controllers/${this.templateName}.controller.js`,
