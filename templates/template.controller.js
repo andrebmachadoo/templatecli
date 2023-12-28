@@ -14,9 +14,9 @@ class TemplateController {
             return res.status(200).json({ message: "Dados registrados!", data: temlate })
         } catch (error) {
             if (error.code == 'P2002') {
-                return res.status(202).json({ message: 'Esse registro já existe' })
+                return res.status(204).json({ message: 'Esse registro já existe' })
             }
-            return res.status(202).json({ message: error.code })
+            return res.status(204).json({ message: error.code })
         }
     }
 
@@ -27,9 +27,9 @@ class TemplateController {
                 destructure,
             })
 
-            return res.status(200).json({ message: "Dados atualizado!", data: temlate })
+            return res.status(204).json({ message: "Dados atualizado!", data: temlate })
         } catch (error) {
-            return res.status(202).json({ message: error.code })
+            return res.status(204).json({ message: error.code })
         }
     }
 
@@ -42,20 +42,21 @@ class TemplateController {
 
             return res.status(200).json(dados)
         } catch (error) {
-            return res.status(202).json({ message: error.code })
+            return res.status(204).json({ message: error.code })
         }
     }
 
     async Delete(req, res) {
         try {
-            const { id } = req.body
-            const result = await TemplateModel.Delete({
-                id
-            })
-
+            const id = req.params.id * 1
+            await TemplateModel.Delete(id)
             return res.status(200).json({ message: 'Registro excluido!' })
         } catch (error) {
-            return res.status(202).json({ message: error.code })
+            if (error.code == 'P2025') {
+                return res.status(204).json({ message: \`Registro com id \${req.params.id} não localizado!\` })
+            }
+            return res.status(204).json({ message: error.message, code: error.code })
+
         }
     }
 }

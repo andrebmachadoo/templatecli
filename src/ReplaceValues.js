@@ -2,20 +2,20 @@ import  fs  from "fs";
 import templateRoutes from "../templates/template.routes.js";
 import templateController from "../templates/template.controller.js";
 import templateModel from "../templates/template.model.js";
-
-
 export default class ReplaceValues{
     constructor(attribs){
         this.templateRoutes = templateRoutes
         this.templateController = templateController
         this.templateModel = templateModel
-        this.fields = '' || 'UndefinedFields'
-        this.templateName = '' || 'UndefinedName'
-
+        this.fields = ''
+        this.templateName = ''
+        this.path = '.'
+        
         Object.assign(this, attribs)
+        
+        this.path =  this.path[0]
         this.templateNameFirstUpper = ''
         this.NameFirstUpper()
-        // this.fs = fs
     }
 
     getAttribValue(obj, key){
@@ -37,7 +37,7 @@ export default class ReplaceValues{
         this.templateController = this.templateController.replace(/template/g, this.templateName);
         this.templateController = this.templateController.replace(/Template/g, this.templateNameFirstUpper);        
         if(this.fields){
-            this.fields = this.fields.replace(/_fields_/g, this.fields);
+            this.templateModel.replace(/destructure/gi, this.fields);
         }
     }
 
@@ -45,7 +45,7 @@ export default class ReplaceValues{
         this.templateModel = this.templateModel.replace(/template/g, this.templateName);
         this.templateModel = this.templateModel.replace(/Template/g, this.templateNameFirstUpper);
         if(this.fields){
-            this.fields = this.fields.replace(/_fields_/g, this.fields);
+            this.templateModel.replace(/destructure/gi, this.fields);
         }
     }
 
@@ -55,18 +55,19 @@ export default class ReplaceValues{
         this.ReplaceModel()
     }
 
-
     CreateTemplateFiles(){
         this.ReplaceAll()
+        const path_root = this.path || '.'
         let templatelist = {
-            templateRoutes:`./routes/${this.templateName}.routes.js`,
-            templateController:`./controllers/${this.templateName}.controller.js`,
-            templateModel:`./model/${this.templateName}.model.js`,
+            templateRoutes:`${path_root}/routes/${this.templateName}.routes.js`,
+            templateController:`${path_root}/controllers/${this.templateName}.controller.js`,
+            templateModel:`${path_root}/model/${this.templateName}.model.js`,
         }
 
         for (const [fileContent, pathAndFileName] of Object.entries(templatelist)) {
 
-            let directory = pathAndFileName.split('/')[1]
+            let directory = this.path +'/'+ pathAndFileName.split('/')[1]
+            fs.existsSync(this.path) || fs.mkdirSync(this.path);
             fs.existsSync(directory) || fs.mkdirSync(directory);
             fs.existsSync(pathAndFileName,(exist)=>{ 
                 if(exist){
@@ -84,6 +85,7 @@ export default class ReplaceValues{
                 //Caso não tenha erro, retornaremos a mensagem de sucesso
                 console.log(`Arquivo ${pathAndFileName} Criado`);
             });
+
 
         }
     }

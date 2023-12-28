@@ -1,15 +1,18 @@
 const templateModel = `
 import { PrismaClient, Prisma } from "@prisma/client";
 const prismaClient = new PrismaClient()
+// const prismaClient = new PrismaClient({
+//     log: ['query', 'error']
+// })
 
 class TemplateModel {
 
     async Create(dados) {
-        const { _fields_ } = dados;
+        const { destructure } = dados;
         try {
             const template = await prismaClient.template.create({
                 data: {
-                    _fields_
+                    destructure
                 }
             })
             return template
@@ -22,13 +25,16 @@ class TemplateModel {
         try {
             const template = await prismaClient.template.findMany({
                 select: {
-                    _fields_: true,
-
-                    profile: {
-                        select: {
-                            _fields_: true,
-                        },
-                    }
+                    // Insert fields to select 
+                    // destructure
+                    // field_name:true,
+                    // If exist data child set how to below exemple
+                    // child_model: {
+                    //     select: {
+                    //         //Insert child fields 
+                    //         //fields: true,
+                    //     },
+                    // }
                 }
             })
             return template
@@ -38,7 +44,7 @@ class TemplateModel {
     }
 
     async Update(dados) {
-        const { _fields_ } = dados
+        const { destructure } = dados
 
         try {
             const template = await prismaClient.template.update({
@@ -46,7 +52,7 @@ class TemplateModel {
                     id: id,
                 },
                 data: {
-                    _fields_
+                    destructure
                 }
             })
             return template

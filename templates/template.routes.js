@@ -10,10 +10,10 @@ const validation = [
     //check('password').isLength({ min: 6, max: 10 }).withMessage('Password deve ser superior a 6 caracteres')
 ]
 
-routerTemplate.post('/login', TemplateController.Login);
-routerTemplate.get('/user', TemplateController.All);
-routerTemplate.post('/user', validation, TemplateController.Create);
-routerTemplate.put('/user', validation, TemplateController.Atualizar);
+routerTemplate.post('/template', TemplateController.Novo);
+routerTemplate.get('/template', TemplateController.All);
+routerTemplate.put('/template', validation, TemplateController.Atualizar);
+routerTemplate.delete('/template', validation, TemplateController.Apagar);
 
 export default routerTemplate;`
 

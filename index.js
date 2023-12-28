@@ -6,7 +6,7 @@ var pathTranspiler = process.argv[0]
 var pathThisFile = process.argv[1]
 params.splice(0, 2);
 
-var validParams     = [ 'name', 'f','help']
+var validParams     = [ 'name', 'f','help','path']
 var sanitizedParams = {}
 var tempName = ''
 params.forEach(v =>{
@@ -27,7 +27,8 @@ if(sanitizedParams.h){
 }else{
   const replace = new ReplaceValues({
     templateName:sanitizedParams.name,
-    fields:sanitizedParams.f
+    fields:sanitizedParams.f,
+    path:sanitizedParams.path
   })
   
   replace.CreateTemplateFiles()
