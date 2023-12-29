@@ -1,8 +1,8 @@
 {
-  "name": "jaravel",
+  "name": "jscli",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "JavaScript Client Interface",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run lint && rollup index.js --file dist/bundle.js --format umd --name 'abmtp'",
@@ -10,7 +10,10 @@
     "lint": "eslint ."
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name":"Andre B. Machado",
+    "email":"andrebmachadoo@gmail.com"
+  },
   "license": "ISC",
   "type": "module",
   "devDependencies": {
